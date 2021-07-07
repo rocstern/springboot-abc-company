@@ -39,7 +39,7 @@ public class TeamController
     }
 
     @PutMapping("/{id}")
-    public Team updateTeam(@PathVariable Long id, TeamInsertDTO req)
+    public Team updateTeam(@PathVariable Long id, @RequestBody TeamInsertDTO req)
     {
         Team team = teamService.getTeam(id);
         Company company = companyService.getCompany(req.getCompanyId());

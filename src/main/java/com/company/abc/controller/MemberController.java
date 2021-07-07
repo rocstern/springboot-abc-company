@@ -34,13 +34,23 @@ public class MemberController {
 
     //post로 insert
     @PostMapping
-    public Member insertMember(@RequestBody Member member)
+    public Member insertMember(@RequestBody MemberInsertDTO req)
     {
+        Team team = teamService.getTeam(req.getTeamId());
+        Member member = new Member();
+
+
+        member.setName(req.getName());
+        member.setPhoneNumber(req.getPhoneNumber());
+        member.setJob(req.getJob());
+        member.setCareer(req.getCareer());
+        member.setTeam(team);
+
         return memberService.saveMember(member);
     }
 
     @PutMapping("/{id}")
-    public Member updateMember(@PathVariable Long id, MemberInsertDTO req)
+    public Member updateMember(@PathVariable Long id, @RequestBody MemberInsertDTO req)
     {
         Member member = memberService.getMember(id);
         Team team = teamService.getTeam(req.getTeamId());
