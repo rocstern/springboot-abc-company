@@ -33,8 +33,13 @@ public class TeamController
     }
 
     @PostMapping
-    public Team insertTeam(@RequestBody Team team)
+    public Team insertTeam(@RequestBody TeamInsertDTO req)
     {
+        Company company = companyService.getCompany(req.getCompanyId());
+        Team team = new Team();
+
+        team.setName(req.getName());
+        team.setCompany(company);
         return teamService.saveTeam(team);
     }
 
